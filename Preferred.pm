@@ -8,8 +8,8 @@ require AutoLoader;
 use Log::TraceMessages qw(t d);
 
 @ISA = qw(Exporter AutoLoader);
-@EXPORT = qw(); @EXPORT_OK = qw(which_lang);
-$VERSION = '0.1.1';
+@EXPORT = qw(); @EXPORT_OK = qw(which_lang acceptable_lang);
+$VERSION = '0.2';
 
 =pod
 
@@ -19,10 +19,17 @@ Lingua::Preferred - Perl extension to choose a language
 
 =head1 SYNOPSIS
 
-  use Lingua::Preferred qw(which_lang);
-  my @wanted = qw(en de fr it de_CH);  
+  use Lingua::Preferred qw(which_lang acceptable_lang);
+  my @wanted = qw(en de fr it de_CH);
   my @available = qw(fr it de);
+
   my $which = which_lang(\@wanted, \@available);
+  print "language $which is the best of those available\n";
+
+  foreach (qw(en_US fr nl de_DE)) {
+      print "language $_ is acceptable\n"
+	if acceptable_lang(\@wanted, $_);
+  }
 
 =head1 DESCRIPTION
 
@@ -33,10 +40,10 @@ pick the best language of those available.  Different 'dialects' given
 by the 'territory' part of the language specifier (such as en, en_GB,
 and en_US) are also supported.
 
-One routine is provided, called C<which_lang()>.  The two
-arguments are:
+The routine C<which_lang()> picks the best language from a list of
+alternatives.  The arguments are:
 
-=over 
+=over
 
 =item
 
@@ -100,7 +107,7 @@ You know English and German, but preferably not Swiss German:
 Here any dialect of German (eg de_DE, de_AT) is preferable to de_CH.
 
 =cut 
-sub which_lang($$) {
+sub which_lang( $$ ) {
     die 'usage: which_lang(listref of preferred langs, listref of available)'
       if @_ != 2;
     my ($pref, $avail) = @_;
@@ -155,7 +162,7 @@ sub which_lang($$) {
     if ($Log::TraceMessages::On) {
 	t 'ranking:';
 	foreach (sort { $a <=> $b } keys %ranking) {
-	    print "$_\t$ranking{$_}\n";
+	    t "$_\t$ranking{$_}";
 	}
     }
 	  
@@ -196,6 +203,31 @@ sub which_lang($$) {
     
     # Couldn't find anything - pick first available language.
     return $avail->[0];
+}
+
+=pod
+
+Whereas C<which_lang()> picks the best language from a list of
+alternatives, C<acceptable_lang()> answers whether a single
+language is included (explicitly or implicitly) in the list of wanted
+languages.  It adds the implicit dialects in the same way.
+
+=cut
+sub acceptable_lang( $$ ) {
+    die 'usage: acceptable_lang(listref of wanted langs, lang)'
+      if @_ != 2;
+    my ($pref, $l) = @_;
+    t '$pref=' . d $pref;
+    t '$l=' . d $l;
+
+    # We just need to ignore the dialects and compare the main part.
+    my @pref = @$pref; # copy
+    $l =~ s/_.+//;
+    foreach (@pref) {
+	s/_.+//;
+	return 1 if $l eq $_;
+    }
+    return 0;
 }
 
 =pod
