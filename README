@@ -22,8 +22,8 @@ to pick languages by adapting HTTP language negotiation or gettext.
 So I do not plan further development on this module except for
 bugfixes.
 
-Version 0.2.2: fixed to ignore the @euro part in de_DE@euro, for
-example.
+Version 0.2.4: accept language choice 'C' (named after the Unix
+locale) to mean pick the first available language.
 
 * Copying
 
@@ -32,4 +32,4 @@ distribute it under the same terms as perl itself (either under the
 GNU General Public License, version 2 or at your option any later
 version); or under the Artistic License.
 
--- Ed Avis, <ed@membled.com>, 2003-01-18
+-- Ed Avis, <ed@membled.com>, 2003-12-14

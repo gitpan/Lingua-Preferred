@@ -5,11 +5,24 @@ use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 
 require Exporter;
 require AutoLoader;
-use Log::TraceMessages qw(t d);
+
+# Use Log::TraceMessages if installed.
+BEGIN {
+    eval { require Log::TraceMessages };
+    if ($@) {
+	*t = sub {};
+	*d = sub { '' };
+    }
+    else {
+	*t = \&Log::TraceMessages::t;
+	*d = \&Log::TraceMessages::d;
+	Log::TraceMessages::check_argv();
+    }
+}
 
 @ISA = qw(Exporter AutoLoader);
 @EXPORT = qw(); @EXPORT_OK = qw(which_lang acceptable_lang);
-$VERSION = '0.2.2';
+$VERSION = '0.2.4';
 
 =pod
 
@@ -49,7 +62,8 @@ alternatives.  The arguments are:
 
 a reference to a list of preferred languages (first is best).  Here, a
 language is a string like C<'en'> or C<'fr_CA'>.  (C<'fr_*'> can also
-be given - see below.)
+be given - see below.)  C<'C'> (named for the Unix 'C' locale) matches
+any language.
 
 =item
 
@@ -93,7 +107,7 @@ You know English and prefer US English:
     $which = which_lang([ 'en_US' ], \@avail);
 
 =item
- 
+
 You know English and German, German/Germany is preferred:
 
     $which = which_lang([ 'en', 'de_DE' ], \@avail);
@@ -137,11 +151,16 @@ sub which_lang( $$ ) {
 	    $implicit{$l} = $pos++
 	}
     };
-    
+
     foreach (@$pref) {
 	$add_explicit->($_);
 
-	if (/^[a-z][a-z]$/) {
+	if ($_ eq 'C') {
+	    # Doesn't imply anything - C already matches every
+	    # possible language.
+	    #
+	}
+	elsif (/^[a-z][a-z]$/) {
 	    # 'en' implies any dialect of 'en' also
 	    $add_implicit->($_ . '_*');
 	}
@@ -153,7 +172,7 @@ sub which_lang( $$ ) {
 	elsif (/^([a-z][a-z])_\*$/) {
 	    # 'en_*' doesn't imply anything - it shouldn't be used
 	    # except in odd cases.
-	    # 
+	    #
 	}
 	else { die "bad language '$_'" } # FIXME support 'English' etc
     }
@@ -165,7 +184,7 @@ sub which_lang( $$ ) {
 	    t "$_\t$ranking{$_}";
 	}
     }
-	  
+
     my @langs = @ranking{sort { $a <=> $b } keys %ranking};
     my %avail;
     foreach (@$avail) {
@@ -174,23 +193,27 @@ sub which_lang( $$ ) {
     }
 
     while (defined (my $lang = shift @langs)) {
-	if ($lang =~ /^([a-z][a-z])_\*$/) {
+	if ($lang eq 'C') {
+	    # Match first available language.
+	    return $avail->[0];
+	}
+	elsif ($lang =~ /^([a-z][a-z])_\*$/) {
 	    # Any dialect of $1 (but not standard).  Work through all
 	    # of @$avail in order trying to find a match.  (So there
 	    # is a slight bias towards languages appearing earlier in
 	    # @$avail.)
-	    # 
+	    #
 	    my $base_lang = $1;
 	  AVAIL: foreach (@$avail) {
 		next if not defined;
 		if (/^\Q$base_lang\E_/) {
 		    # Well, it matched... but maybe this dialect was
 		    # explicitly specified with a lower priority.
-		    # 
+		    #
 		    foreach my $lower_lang (@langs) {
 			next AVAIL if (/^\Q$lower_lang\E$/);
 		    }
-		    
+		
 		    return $_;
 		}
 	    }
@@ -200,7 +223,7 @@ sub which_lang( $$ ) {
 	    return $lang if $avail{$lang};
 	}
     }
-    
+
     # Couldn't find anything - pick first available language.
     return $avail->[0];
 }

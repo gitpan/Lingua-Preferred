@@ -3,13 +3,12 @@
 use strict;
 my ($numtests, $loaded);
 
-BEGIN { $numtests = 69; $| = 1; print "1..$numtests\n"; } # FIXME
+BEGIN { $numtests = 76; $| = 1; print "1..$numtests\n"; } # FIXME
 END {print "not ok 1\n" unless $loaded;}
 use Lingua::Preferred qw(which_lang acceptable_lang);
 $loaded = 1;
 print "ok 1\n";
 
-use Log::TraceMessages; #$Log::TraceMessages::On = 1; # FIXME
 use Data::Dumper;
 
 my $tests_done = 1;
@@ -50,6 +49,14 @@ check_which_lang [ 'de', 'de_*', 'de_CH'       ], [ 'fr'                   ], 'f
 check_which_lang [ 'de', 'de_*', 'de_CH'       ], [ 'de_CH'                ], 'de_CH';
 check_which_lang [ 'de', 'de_*', 'de_CH'       ], [ 'de_CH', 'de_DE'       ], 'de_DE';
 check_which_lang [ 'de', 'de_*', 'fr', 'de_CH' ], [ 'de_CH', 'fr'          ], 'fr';
+# C matches anything, but it need not be first in the list
+check_which_lang [ 'C',                        ], [ 'en'                   ], 'en';
+check_which_lang [ 'C',                        ], [ undef                  ], undef;
+check_which_lang [ 'en', 'C',                  ], [ 'en'                   ], 'en';
+check_which_lang [ 'C', 'en',                  ], [ 'en'                   ], 'en';
+check_which_lang [ 'C'                         ], [ 'en', 'fr'             ], 'en';
+check_which_lang [ 'C', 'fr'                   ], [ 'en', 'fr'             ], 'en';
+check_which_lang [ 'fr', 'C'                   ], [ 'en', 'fr'             ], 'fr';
 # The following are probably not something you'd actually use
 check_which_lang [ 'en_*'                      ], [ 'en_GB', 'fr'          ], 'en_GB';
 # N.B. en_* implies en_IE, en_CA etc. but not en

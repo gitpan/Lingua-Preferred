@@ -4,5 +4,4 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     'NAME'	   => 'Lingua::Preferred',
     'VERSION_FROM' => 'Preferred.pm', # finds $VERSION
-    'PREREQ_PM'    => { 'Log::TraceMessages' => '1.0' },
 );
