@@ -10,4 +10,6 @@ de), and it returns the language to use.  There is some fooling around
 with picking second-best 'dialects' of a language, for example if the
 user's language is en_IE and a page is available in en_US.
 
--- Ed Avis, <epa98@doc.ic.ac.uk>, 2001-02-21
+Version 0.1.1: just an installation bugfix.
+
+-- Ed Avis, <epa98@doc.ic.ac.uk>, 2001-11-28

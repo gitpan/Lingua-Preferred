@@ -9,7 +9,7 @@ use Log::TraceMessages qw(t d);
 
 @ISA = qw(Exporter AutoLoader);
 @EXPORT = qw(); @EXPORT_OK = qw(which_lang);
-$VERSION = '0.1';
+$VERSION = '0.1.1';
 
 =pod
 

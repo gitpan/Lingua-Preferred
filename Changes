@@ -1,4 +1,13 @@
-2001-02-21  Edward Avis,  <epa98@texel02>
+2001-11-28  Edward Avis,  <epa98@voxel24>
+
+	* Preferred.pm: Version 0.1.1.
+
+	* README: Updated for version 0.1.1.
+
+	* Makefile.PL:
+	Added Log::TraceMessages as a prerequisite (spotted by cpan-testers).
+
+2001-02-21  Edward Avis,  <epa98@voxel24>
 
 	* mkdist:
 	Remove Makefile.old for tidiness.  I suppose I should just get
@@ -11,11 +20,13 @@
 
 	* README: New file.
 
-2001-02-19  Edward Avis,  <epa98@texel02>
+2001-02-19  Edward Avis,  <epa98@voxel24>
 
 	* test.pl: Revised test case for en_* to reflect new semantics
 
-2001-02-16  Edward Avis,  <epa98@texel02>
+	* Preferred.pm: Change semantics of en_* - it no longer implies 'en'
+
+2001-02-16  Edward Avis,  <epa98@voxel24>
 
 	* Preferred.pm: Fix synopsis
 
@@ -25,7 +36,7 @@
 
 	* Preferred.pm: First working version
 
-2001-02-14  Edward Avis,  <epa98@texel02>
+2001-02-14  Edward Avis,  <epa98@voxel24>
 
 	* mkdist, test.pl, Preferred.pm, Makefile.PL, MANIFEST: New file.
 
