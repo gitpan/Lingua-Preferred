@@ -15,13 +15,21 @@ single language, and returns true iff that language is acceptable.
 Again it assumes that different dialects of a language are mutually
 comprehensible.
 
-Version 0.2.1: no code changes, just clarified the licence.
+Note: I created this module by packaging up some of my own code, but
+with hindsight I'm not sure it was a good idea.  The world does not
+need another NIH way of doing language selections.  It would be better
+to pick languages by adapting HTTP language negotiation or gettext.
+So I do not plan further development on this module except for
+bugfixes.
+
+Version 0.2.2: fixed to ignore the @euro part in de_DE@euro, for
+example.
 
 * Copying
 
-Copyright 2001-2002 Ed Avis.  This is free software; you may
+Copyright 2001-2003 Ed Avis.  This is free software; you may
 distribute it under the same terms as perl itself (either under the
 GNU General Public License, version 2 or at your option any later
 version); or under the Artistic License.
 
--- Ed Avis, <ed@membled.com>, 2002-09-24
+-- Ed Avis, <ed@membled.com>, 2003-01-18

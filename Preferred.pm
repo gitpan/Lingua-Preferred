@@ -9,7 +9,7 @@ use Log::TraceMessages qw(t d);
 
 @ISA = qw(Exporter AutoLoader);
 @EXPORT = qw(); @EXPORT_OK = qw(which_lang acceptable_lang);
-$VERSION = '0.2.1';
+$VERSION = '0.2.2';
 
 =pod
 
@@ -145,7 +145,7 @@ sub which_lang( $$ ) {
 	    # 'en' implies any dialect of 'en' also
 	    $add_implicit->($_ . '_*');
 	}
-	elsif (/^([a-z][a-z])_([A-Z][A-Z])$/) {
+	elsif (/^([a-z][a-z])_([A-Z][A-Z])(?:\@.*)?$/) { # ignore @whatever
 	    # 'en_GB' implies 'en', and secondly any other dialect
 	    $add_implicit->($1);
 	    $add_implicit->($1 . '_*');
