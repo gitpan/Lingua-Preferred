@@ -1,16 +1,26 @@
-2002-02-01  Edward Avis,  <epa98@voxel05>
+2002-09-24  Ed Avis  <ed@budvar.future-i.net>
+
+	* README, Preferred.pm: Version 0.2.1.
+
+	* README: Added copyright information.
+
+2002-09-01  Ed Avis  <ed@budvar.future-i.net>
+
+	* Preferred.pm, README: Updated my email address.
+
+2002-02-01  epa98  <epa98@budvar.future-i.net>
 
 	* Preferred.pm, README, test.pl:
 	Version 0.2: added acceptable_lang() to return a yes or no
 	answer about whether one language is okay.
 
-2002-01-28  Edward Avis,  <epa98@voxel05>
+2002-01-28  epa98  <epa98@budvar.future-i.net>
 
 	* Preferred.pm, README: Version 0.1.2.
 
 	* Preferred.pm: Fixed print to stdout when trace enabled (d'oh!).
 
-2001-11-28  Edward Avis,  <epa98@voxel05>
+2001-11-28  epa98  <epa98@budvar.future-i.net>
 
 	* Preferred.pm: Version 0.1.1.
 
@@ -19,7 +29,7 @@
 	* Makefile.PL:
 	Added Log::TraceMessages as a prerequisite (spotted by cpan-testers).
 
-2001-02-21  Edward Avis,  <epa98@voxel05>
+2001-02-21  epa98  <epa98@budvar.future-i.net>
 
 	* mkdist:
 	Remove Makefile.old for tidiness.  I suppose I should just get
@@ -32,13 +42,13 @@
 
 	* README: New file.
 
-2001-02-19  Edward Avis,  <epa98@voxel05>
+2001-02-19  epa98  <epa98@budvar.future-i.net>
 
 	* test.pl: Revised test case for en_* to reflect new semantics
 
 	* Preferred.pm: Change semantics of en_* - it no longer implies 'en'
 
-2001-02-16  Edward Avis,  <epa98@voxel05>
+2001-02-16  epa98  <epa98@budvar.future-i.net>
 
 	* Preferred.pm: Fix synopsis
 
@@ -48,7 +58,7 @@
 
 	* Preferred.pm: First working version
 
-2001-02-14  Edward Avis,  <epa98@voxel05>
+2001-02-14  epa98  <epa98@budvar.future-i.net>
 
 	* mkdist, test.pl, Preferred.pm, Makefile.PL, MANIFEST: New file.
 

@@ -9,7 +9,7 @@ use Log::TraceMessages qw(t d);
 
 @ISA = qw(Exporter AutoLoader);
 @EXPORT = qw(); @EXPORT_OK = qw(which_lang acceptable_lang);
-$VERSION = '0.2';
+$VERSION = '0.2.1';
 
 =pod
 
@@ -234,7 +234,7 @@ sub acceptable_lang( $$ ) {
 
 =head1 AUTHOR
 
-Ed Avis, epa98@doc.ic.ac.uk
+Ed Avis, ed@membled.com
 
 =head1 SEE ALSO
 

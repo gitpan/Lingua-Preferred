@@ -15,6 +15,13 @@ single language, and returns true iff that language is acceptable.
 Again it assumes that different dialects of a language are mutually
 comprehensible.
 
-Version 0.2: adds acceptable_lang().
+Version 0.2.1: no code changes, just clarified the licence.
 
--- Ed Avis, <epa98@doc.ic.ac.uk>, 2002-02-01
+* Copying
+
+Copyright 2001-2002 Ed Avis.  This is free software; you may
+distribute it under the same terms as perl itself (either under the
+GNU General Public License, version 2 or at your option any later
+version); or under the Artistic License.
+
+-- Ed Avis, <ed@membled.com>, 2002-09-24
