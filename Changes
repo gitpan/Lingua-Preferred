@@ -1,0 +1,31 @@
+2001-02-21  Edward Avis,  <epa98@texel02>
+
+	* mkdist:
+	Remove Makefile.old for tidiness.  I suppose I should just get
+	things out of the RCS directory as needed.
+
+	* mkdist:
+	Remove pm_to_blib also - it screws things up if it's lying around
+
+	* README: Initial blurb
+
+	* README: New file.
+
+2001-02-19  Edward Avis,  <epa98@texel02>
+
+	* test.pl: Revised test case for en_* to reflect new semantics
+
+2001-02-16  Edward Avis,  <epa98@texel02>
+
+	* Preferred.pm: Fix synopsis
+
+	* test.pl: Fix number-of-tests printing; add warnings and strict
+
+	* test.pl: Wrote a few test cases
+
+	* Preferred.pm: First working version
+
+2001-02-14  Edward Avis,  <epa98@texel02>
+
+	* mkdist, test.pl, Preferred.pm, Makefile.PL, MANIFEST: New file.
+

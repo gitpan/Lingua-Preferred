@@ -1,0 +1,13 @@
+Lingua::Preferred
+
+Many web browsers let you specify which languages you understand.
+Then they negotiate with the web server to get documents in the best
+language possible.  This is something similar in Perl.
+
+which_lang() takes a list of languages the user understands, such as
+qw(en es) and a list of those available on the server, such as qw(en fr
+de), and it returns the language to use.  There is some fooling around
+with picking second-best 'dialects' of a language, for example if the
+user's language is en_IE and a page is available in en_US.
+
+-- Ed Avis, <epa98@doc.ic.ac.uk>, 2001-02-21
